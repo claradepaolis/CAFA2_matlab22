@@ -15,9 +15,6 @@ function [annotation] = pfp_leafannot(oa)
 % [logical and sparse]
 % annotation: The annoation matrix.
 %
-% Dependency
-% ----------
-%[>]Bioinformatics Toolbox:graphtopoorder
 %
 % See Also
 % --------
@@ -37,7 +34,8 @@ function [annotation] = pfp_leafannot(oa)
   m = numel(oa.ontology.term);
 
   % find a topological order, from root to leaf
-  order = graphtopoorder(oa.ontology.DAG');
+  DAG = digraph(oa.ontology.DAG');
+  order = toposort(DAG);
   has_annot = any(oa.annotation, 1);
 
   annotation = oa.annotation;

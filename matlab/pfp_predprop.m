@@ -33,9 +33,6 @@ function [pred] = pfp_predprop(pred, force, scheme)
 % [struct]
 % pred: The same structure but with score propagated.
 %
-% Dependency
-% ----------
-%[>]Bioinformatics Toolbox:graphtopoorder
 
   % check inputs {{{
   if nargin ~=2 && nargin ~= 3
@@ -57,7 +54,8 @@ function [pred] = pfp_predprop(pred, force, scheme)
   % }}}
 
   % Topologically sort terms from leaf to root. {{{
-  order = graphtopoorder(pred.ontology.DAG);
+  DAG = digraph(pred.ontology.DAG);
+  order = toposort(DAG);
 
   % Start with the deepest term which has a score.
   deepest = min(find(sum(pred.score(order), 1) > 0));

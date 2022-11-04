@@ -35,10 +35,6 @@ function [subont] = pfp_subont(ont, list)
 % [struct]
 % subont: The resulting sub-ontology structure.
 %
-% Dependency
-% ----------
-%[>]Bioinformatics Toolbox:graphtopoorder
-%
 % See Also
 % --------
 %[>]pfp_ontbuild.m
@@ -71,7 +67,8 @@ function [subont] = pfp_subont(ont, list)
 
   % run algorithm to find selected terms {{{
   DAG        = ont.DAG ~= 0;
-  topoorder  = graphtopoorder(DAG); % Bioinformatics Toolbox
+  DAG_G = digraph(DAG);
+  topoorder  = toposort(DAG_G);
   isselected = ismember(topoorder, selected);
 
   for t = 1:length(topoorder)

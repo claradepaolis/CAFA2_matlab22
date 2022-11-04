@@ -20,9 +20,7 @@ function [A] = pfp_annotprop(DAG, A)
 % [logical]
 % A:  The propagated ontology annotation matrix.
 %
-% Dependency
-% ----------
-%[>]Bioinformatics Toolbox:graphtopoorder
+
 
   % check inputs {{{
   if nargin ~= 2
@@ -41,7 +39,8 @@ function [A] = pfp_annotprop(DAG, A)
   DAG = DAG ~= 0; % make it logical
 
   % topologically sort terms from leaf to root
-  order = graphtopoorder(DAG);
+  DAG_G = digraph(DAG);
+  order = toposort(DAG_G);
   for i = 1 : numel(order)
     p = DAG(order(i), :); % parent term(s)
     A(:, p) = bsxfun(@or, A(:, p), A(:, order(i)));
