@@ -1,3 +1,6 @@
+This fork is intended to fix an incompatability with current Matlab version 2022 which does not support the use of the method `graphtopoorder` from the Bioinformatics toolbox. This toolbox is no longer required and calls to `graphtopoorder` have been replaced with the creation of a `DiGraph` object and calls to the function `toposort`
+
+
 # CAFA2
 
 [![](https://img.shields.io/badge/license-MIT-blue.svg)]()
