@@ -76,7 +76,7 @@ function [eia] = pfp_eia(DAG, A)
 
   % prepare output {{{
   eia          = zeros(1, m);
-  eia(has_seq) = -log(subia);
+  eia(has_seq) = -log2(subia);
   % }}}
 return
 
